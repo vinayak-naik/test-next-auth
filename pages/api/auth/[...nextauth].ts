@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import jwt from "jsonwebtoken";
+
+const MY_SECRETE = process.env.MY_SECRETE || "";
 
 export default NextAuth({
   providers: [
@@ -10,16 +13,19 @@ export default NextAuth({
         "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code",
     }),
   ],
-  jwt: {
-    encryption: true,
-  },
+ 
   secret: process.env.NEXT_AUTH_SECRETE,
   callbacks: {
-    async jwt(token, account) {
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken;
-      }
-      return token;
+    async session(session) {
+      if (!session) session;
+
+      const name = session ? session.user?.name : "";
+      const email = session ? session.user?.email : "";
+
+      //Encrypting privateKey
+      const token = jwt.sign({ name, email }, MY_SECRETE);
+      session.token = token;
+      return session;
     },
     redirect: async (url) => {
       if (url === "/user") {
