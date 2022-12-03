@@ -15,7 +15,7 @@ export default NextAuth({
   ],
   callbacks: {
     async session(session) {
-      if (!session) return {};
+      if (!session) session;
 
       const name = session ? session.user?.name : "";
       const email = session ? session.user?.email : "";
@@ -23,7 +23,7 @@ export default NextAuth({
       //Encrypting privateKey
       const token = jwt.sign({ name, email }, MY_SECRETE);
       session.token = token;
-      return {};
+      return session;
     },
     redirect: async (url) => {
       if (url === "/user") {
