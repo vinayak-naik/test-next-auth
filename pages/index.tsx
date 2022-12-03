@@ -2,10 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { signIn,signOut, useSession } from "next-auth/client";
+import env from 'dotenv'
 
 export default function Home() {
+ 
   const [session]=useSession()
   console.log(session)
+  const googleId=process.env.GOOGLE_ID || "";
+  const googleSecrete=process.env.GOOGLE_SECRET || "";
+  const nextAuth=process.env.NEXT_AUTH || "";
+  const nodeEnv=process.env.NODE_ENV || "";
   return (
     <div className={styles.container}>
       <Head>
@@ -22,10 +28,10 @@ export default function Home() {
 
         <button onClick={()=>signIn()}>sign in</button>
         <button onClick={()=>signOut()}>sign out</button>
-        <div>{process.env.GOOGLE_ID}</div>
-        <div>{process.env.GOOGLE_SECRET}</div>
-        <div>{process.env.NEXT_AUTH}</div>
-        <div>{process.env.NODE_ENV}</div>
+        <div>googleId:{googleId}</div>
+        <div>googleSecrete:{googleSecrete}</div>
+        <div>nextAuth:{nextAuth}</div>
+        <div>nodeEnv:{nodeEnv}</div>
 </div>
       </main>
 
