@@ -22,6 +22,10 @@ export default function Home() {
 
         <button onClick={()=>signIn()}>sign in</button>
         <button onClick={()=>signOut()}>sign out</button>
+        <div>{process.env.GOOGLE_ID}</div>
+        <div>{process.env.GOOGLE_SECRET}</div>
+        <div>{process.env.NEXT_AUTH}</div>
+        <div>{process.env.NODE_ENV}</div>
 </div>
       </main>
 
