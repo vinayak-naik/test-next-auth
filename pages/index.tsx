@@ -8,10 +8,6 @@ export default function Home() {
  
   const [session]=useSession()
   console.log(session)
-  const googleId=process.env.GOOGLE_ID || "";
-  const googleSecrete=process.env.GOOGLE_SECRET || "";
-  const nextAuth=process.env.NEXT_AUTH || "";
-  const nodeEnv=process.env.NODE_ENV || "";
   return (
     <div className={styles.container}>
       <Head>
@@ -28,10 +24,7 @@ export default function Home() {
 
         <button onClick={()=>signIn()}>sign in</button>
         <button onClick={()=>signOut()}>sign out</button>
-        <div>googleId:{googleId}</div>
-        <div>googleSecrete:{googleSecrete}</div>
-        <div>nextAuth:{nextAuth}</div>
-        <div>nodeEnv:{nodeEnv}</div>
+       
 </div>
       </main>
 
